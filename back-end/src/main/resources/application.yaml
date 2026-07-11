@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: back-end
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bryan_cooking_db
+    username: postgres
+    password: admin
