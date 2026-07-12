@@ -52,7 +52,7 @@ public class IngredientService {
 
     public IngredientResponse createIngredient(IngredientInput ingredientInput) {
 
-        IngredientCategoryResponse category = ingredientCategoryService.getById(ingredientInput.categoryId());
+        IngredientCategoryResponse category = ingredientCategoryService.findIngredientCategoryById(ingredientInput.categoryId());
 
         IngredientEntity entity = ingredientInputToIngredientEntityMapper.mapper(ingredientInput, category);
         IngredientEntity savedEntity = ingredientRepository.save(entity);
@@ -64,7 +64,7 @@ public class IngredientService {
     public IngredientResponse editIngredient(IngredientInputEdit ingredientInputEdit, String id) {
 
         findIngredientById(id);
-        IngredientCategoryResponse category = ingredientCategoryService.getById(ingredientInputEdit.categoryId());
+        IngredientCategoryResponse category = ingredientCategoryService.findIngredientCategoryById(ingredientInputEdit.categoryId());
 
         IngredientEntity updatedEntity = ingredientRepository.save(
                 IngredientEntity.builder()
