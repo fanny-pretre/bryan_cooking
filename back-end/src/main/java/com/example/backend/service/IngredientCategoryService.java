@@ -48,7 +48,6 @@ public class IngredientCategoryService {
 
     public IngredientCategoryResponse editIngredientCategory(IngredientCategoryInputEdit ingredientCategoryInputEdit, String id) {
 
-
         IngredientCategoryEntity updatedEntity = ingredientCategoryRepository.save(
                 IngredientCategoryEntity.builder()
                         .id(new BigInteger(id))
