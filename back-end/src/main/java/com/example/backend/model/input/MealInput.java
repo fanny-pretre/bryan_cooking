@@ -6,9 +6,10 @@ import lombok.Builder;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Builder
-    public record IngredientInputEdit(
+    public record MealInput(
         @NotNull
         String name,
 
@@ -17,5 +18,13 @@ import java.math.BigInteger;
         String imageUrl,
 
         @NotNull
-        BigInteger categoryId) {
+        String season,
+
+        @NotNull
+        List<BigInteger> categoryIds,
+
+        @NotNull
+        List<BigInteger> ingredientIds
+
+) {
     }

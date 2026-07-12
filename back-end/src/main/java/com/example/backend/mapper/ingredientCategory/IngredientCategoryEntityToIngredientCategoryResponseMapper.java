@@ -1,4 +1,4 @@
-package com.example.backend.mapper;
+package com.example.backend.mapper.ingredientCategory;
 
 import com.example.backend.model.entity.IngredientCategoryEntity;
 import com.example.backend.model.response.IngredientCategoryResponse;

@@ -10,12 +10,12 @@ import java.math.BigInteger;
 @Builder
     public record IngredientInput(
         @NotNull
-            String name,
+        String name,
 
         @URL
         @NotNull
-        String image_url,
+        String imageUrl,
 
         @NotNull
-        BigInteger category_id) {
+        BigInteger categoryId) {
     }

@@ -1,9 +1,9 @@
 package com.example.backend.service;
 
 import com.example.backend.exception.DataNotFound;
-import com.example.backend.mapper.IngredientCategoryResponseToIngredientCategoryEntityMapper;
-import com.example.backend.mapper.IngredientEntityToIngredientResponseMapper;
-import com.example.backend.mapper.IngredientInputToIngredientEntityMapper;
+import com.example.backend.mapper.ingredientCategory.IngredientCategoryResponseToIngredientCategoryEntityMapper;
+import com.example.backend.mapper.ingredient.IngredientEntityToIngredientResponseMapper;
+import com.example.backend.mapper.ingredient.IngredientInputToIngredientEntityMapper;
 import com.example.backend.model.entity.IngredientEntity;
 import com.example.backend.model.input.IngredientInput;
 import com.example.backend.model.input.IngredientInputEdit;
@@ -44,9 +44,15 @@ public class IngredientService {
         return ingredientEntityToIngredientResponseMapper.ingredientMapper(ingredient);
     }
 
+    public List<IngredientResponse> findIngredientByIds(List<BigInteger> ids) {
+        List<IngredientEntity> ingredients = ingredientRepository.findAllById(ids);
+
+        return ingredients.stream().map(ingredientEntityToIngredientResponseMapper::ingredientMapper).toList();
+    }
+
     public IngredientResponse createIngredient(IngredientInput ingredientInput) {
 
-        IngredientCategoryResponse category = ingredientCategoryService.getById(String.valueOf(ingredientInput.category_id()));
+        IngredientCategoryResponse category = ingredientCategoryService.getById(ingredientInput.categoryId());
 
         IngredientEntity entity = ingredientInputToIngredientEntityMapper.mapper(ingredientInput, category);
         IngredientEntity savedEntity = ingredientRepository.save(entity);
@@ -58,13 +64,13 @@ public class IngredientService {
     public IngredientResponse editIngredient(IngredientInputEdit ingredientInputEdit, String id) {
 
         findIngredientById(id);
-        IngredientCategoryResponse category = ingredientCategoryService.getById(String.valueOf(ingredientInputEdit.category_id()));
+        IngredientCategoryResponse category = ingredientCategoryService.getById(ingredientInputEdit.categoryId());
 
         IngredientEntity updatedEntity = ingredientRepository.save(
                 IngredientEntity.builder()
                         .id(new BigInteger(id))
                         .name(ingredientInputEdit.name())
-                        .image_url(ingredientInputEdit.image_url())
+                        .image_url(ingredientInputEdit.imageUrl())
                         .ingredientCategory(ingredientCategoryResponseToIngredientCategoryEntityMapper.mapper(category))
                         .build()
         );
