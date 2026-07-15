@@ -43,9 +43,9 @@ public class MealService {
                 .toList();
     }
 
-    public MealResponse findMealById(String id) {
+    public MealResponse findMealById(BigInteger id) {
 
-        MealEntity meal = mealRepository.findById(new BigInteger(id))
+        MealEntity meal = mealRepository.findById(id)
                 .orElseThrow(() ->
                         new DataNotFound("meal", id));
 
@@ -68,7 +68,7 @@ public class MealService {
         return mealEntityToMealResponseMapper.mealMapper(savedEntity);
     }
 
-    public MealResponse editMeal(MealInputEdit mealInputEdit, String id) {
+    public MealResponse editMeal(MealInputEdit mealInputEdit, BigInteger id) {
 
         findMealById(id);
         List<MealCategoryResponse> categories = mealCategoryService.findMealCategoryByIds(mealInputEdit.categoryIds());
@@ -76,7 +76,7 @@ public class MealService {
 
         MealEntity updatedEntity = mealRepository.save(
                 MealEntity.builder()
-                        .id(new BigInteger(id))
+                        .id(id)
                         .name(mealInputEdit.name())
                         .imageUrl(mealInputEdit.imageUrl())
                         .season(mealInputEdit.season())
@@ -88,8 +88,8 @@ public class MealService {
         return mealEntityToMealResponseMapper.mealMapper(updatedEntity);
     }
 
-    public void deleteIngredient(String id) {
-        MealEntity entite = mealRepository.findById(new BigInteger(id))
+    public void deleteMeal(BigInteger id) {
+        MealEntity entite = mealRepository.findById(id)
                 .orElseThrow(() ->
                         new DataNotFound("meal", id));
 

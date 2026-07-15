@@ -17,9 +17,9 @@ public class DayService {
 
     private final DayEntityToDayResponseMapper dayEntityToDayResponseMapper;
 
-    public DayResponse findDayById(String id) {
+    public DayResponse findDayById(BigInteger id) {
 
-        DayEntity day = dayRepository.findById(new BigInteger(id))
+        DayEntity day = dayRepository.findById(id)
                 .orElseThrow(() ->
                         new DataNotFound("day", id));
 

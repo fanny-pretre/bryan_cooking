@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/day")
@@ -17,6 +19,6 @@ public class DayController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DayResponse> findDayById(@PathVariable String id) {
-        return ResponseEntity.ok(dayService.findDayById(id));
+        return ResponseEntity.ok(dayService.findDayById(new BigInteger(id)));
     }
 }

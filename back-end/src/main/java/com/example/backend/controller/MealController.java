@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class MealController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MealResponse> findMealById(@PathVariable String id) {
-        return ResponseEntity.ok(mealService.findMealById(id));
+        return ResponseEntity.ok(mealService.findMealById(new BigInteger(id)));
     }
 
     @PostMapping
@@ -35,12 +36,12 @@ public class MealController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MealResponse> editMeal(@Valid @RequestBody MealInputEdit mealInputEdit, @PathVariable String id) {
-        return ResponseEntity.ok(mealService.editMeal(mealInputEdit, id));
+        return ResponseEntity.ok(mealService.editMeal(mealInputEdit, new BigInteger(id)));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteIngredient(@PathVariable String id) {
-        mealService.deleteIngredient(id);
+    public ResponseEntity<Void> deleteMeal(@PathVariable String id) {
+        mealService.deleteMeal(new BigInteger(id));
         return ResponseEntity.noContent().build();
     }
 }

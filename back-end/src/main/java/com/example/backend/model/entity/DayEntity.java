@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +29,7 @@ public class DayEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "weekId", nullable = false)
     private WeekEntity week;
+
+    @OneToMany(mappedBy = "day")
+    private List<MealDayEntity> mealDays = new ArrayList<>();
 }
