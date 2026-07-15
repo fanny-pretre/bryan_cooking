@@ -17,7 +17,7 @@ public class IngredientResponseToIngredientEntityMapper {
         return IngredientEntity.builder().
                 id(ingredientResponse.id())
                 .name(ingredientResponse.name())
-                .image_url(ingredientResponse.imageUrl())
+                .imageUrl(ingredientResponse.imageUrl())
                 .ingredientCategory(ingredientCategoryResponseToEntityMapper.mapper(ingredientResponse.category()))
                 .build();
     }

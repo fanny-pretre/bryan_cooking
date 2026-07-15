@@ -70,7 +70,7 @@ public class IngredientService {
                 IngredientEntity.builder()
                         .id(new BigInteger(id))
                         .name(ingredientInputEdit.name())
-                        .image_url(ingredientInputEdit.imageUrl())
+                        .imageUrl(ingredientInputEdit.imageUrl())
                         .ingredientCategory(ingredientCategoryResponseToIngredientCategoryEntityMapper.mapper(category))
                         .build()
         );

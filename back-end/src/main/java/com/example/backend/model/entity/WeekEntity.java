@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,22 +16,18 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name="INGREDIENT")
-public class IngredientEntity {
+@Table(name="WEEK")
+public class WeekEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
     @NotNull
-    private String name;
+    private Integer numYear;
 
-    @URL
-    private String imageUrl;
+    @NotNull
+    private Integer numWeek;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ingredientCategoryId", nullable = false)
-    private IngredientCategoryEntity ingredientCategory;
-
-    @ManyToMany(mappedBy = "ingredients")
-    private List<MealEntity> meals;
+    @OneToMany(mappedBy = "week", fetch = FetchType.LAZY)
+    private List<DayEntity> days = new ArrayList<>();
 }

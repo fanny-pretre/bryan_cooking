@@ -27,7 +27,7 @@ public class MealEntity {
     private String name;
 
     @URL
-    private String image_url;
+    private String imageUrl;
 
     @NotNull
     private String season;
@@ -35,8 +35,8 @@ public class MealEntity {
     @ManyToMany
     @JoinTable(
             name = "MEAL_CATEGORY_LINK",
-            joinColumns = @JoinColumn(name = "meal_id"),
-            inverseJoinColumns = @JoinColumn(name = "meal_category_id")
+            joinColumns = @JoinColumn(name = "mealId"),
+            inverseJoinColumns = @JoinColumn(name = "mealCategoryId")
     )
 
     private List<MealCategoryEntity> mealCategories = new ArrayList<>();
@@ -44,8 +44,8 @@ public class MealEntity {
     @ManyToMany
     @JoinTable(
             name = "MEAL_INGREDIENT_LINK",
-            joinColumns = @JoinColumn(name = "meal_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+            joinColumns = @JoinColumn(name = "mealId"),
+            inverseJoinColumns = @JoinColumn(name = "ingredientId")
     )
     private List<IngredientEntity> ingredients = new ArrayList<>();
 }

@@ -78,7 +78,7 @@ public class MealService {
                 MealEntity.builder()
                         .id(new BigInteger(id))
                         .name(mealInputEdit.name())
-                        .image_url(mealInputEdit.imageUrl())
+                        .imageUrl(mealInputEdit.imageUrl())
                         .season(mealInputEdit.season())
                         .mealCategories(categories.stream().map(mealCategoryResponseToEntityMapper::mapper).toList())
                         .ingredients(ingredients.stream().map(ingredientResponseToEntityMapper::ingredientResponseToIngredientEntityMapper).toList())

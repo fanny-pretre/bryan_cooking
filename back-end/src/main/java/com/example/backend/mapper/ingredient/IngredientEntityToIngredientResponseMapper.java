@@ -16,7 +16,7 @@ public class IngredientEntityToIngredientResponseMapper {
         return IngredientResponse.builder()
                 .id(ingredientEntity.getId())
                 .name(ingredientEntity.getName())
-                .imageUrl(ingredientEntity.getImage_url())
+                .imageUrl(ingredientEntity.getImageUrl())
                 .category(ingredientCategoryMapper.mapper(ingredientEntity.getIngredientCategory()))
                 .build();
     }

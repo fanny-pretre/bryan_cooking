@@ -11,7 +11,7 @@ public class IngredientCategoryResponseToIngredientCategoryEntityMapper {
         return IngredientCategoryEntity.builder()
                 .id(ingredientCategoryResponse.id())
                 .name(ingredientCategoryResponse.name())
-                .display_order(ingredientCategoryResponse.displayOrder())
+                .displayOrder(ingredientCategoryResponse.displayOrder())
                 .build();
     }
 }

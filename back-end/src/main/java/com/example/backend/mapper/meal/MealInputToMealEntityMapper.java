@@ -22,7 +22,7 @@ public class MealInputToMealEntityMapper {
 
        return MealEntity.builder()
                 .name(mealInput.name())
-                .image_url(mealInput.imageUrl())
+                .imageUrl(mealInput.imageUrl())
                 .season(mealInput.season())
                 .mealCategories(categories.stream().map(mealCategoryResponseToEntityMapper::mapper).toList())
                 .ingredients(ingredients.stream().map(ingredientResponseToEntityMapper::ingredientResponseToIngredientEntityMapper).toList())

@@ -10,7 +10,7 @@ public class IngredientCategoryInputToIngredientCategoryEntityMapper {
    public IngredientCategoryEntity mapper(IngredientCategoryInput ingredientCategoryInput) {
         return IngredientCategoryEntity.builder()
                 .name(ingredientCategoryInput.name())
-                .display_order(ingredientCategoryInput.displayOrder())
+                .displayOrder(ingredientCategoryInput.displayOrder())
                 .build();
     }
 }

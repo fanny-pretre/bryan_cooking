@@ -52,7 +52,7 @@ public class IngredientCategoryService {
                 IngredientCategoryEntity.builder()
                         .id(new BigInteger(id))
                         .name(ingredientCategoryInputEdit.name())
-                        .display_order(ingredientCategoryInputEdit.displayOrder())
+                        .displayOrder(ingredientCategoryInputEdit.displayOrder())
                         .build()
         );
 

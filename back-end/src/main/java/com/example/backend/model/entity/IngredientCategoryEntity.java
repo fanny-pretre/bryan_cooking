@@ -26,7 +26,7 @@ public class IngredientCategoryEntity {
     private String name;
 
     @NotNull
-    private Integer display_order;
+    private Integer displayOrder;
 
     @OneToMany(mappedBy = "ingredientCategory", fetch = FetchType.LAZY)
     private List<IngredientEntity> ingredients = new ArrayList<>();

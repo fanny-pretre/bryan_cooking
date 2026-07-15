@@ -6,32 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
 
 import java.math.BigInteger;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name="INGREDIENT")
-public class IngredientEntity {
+@Table(name="DAY")
+public class DayEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
     @NotNull
-    private String name;
-
-    @URL
-    private String imageUrl;
+    private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ingredientCategoryId", nullable = false)
-    private IngredientCategoryEntity ingredientCategory;
-
-    @ManyToMany(mappedBy = "ingredients")
-    private List<MealEntity> meals;
+    @JoinColumn(name = "weekId", nullable = false)
+    private WeekEntity week;
 }

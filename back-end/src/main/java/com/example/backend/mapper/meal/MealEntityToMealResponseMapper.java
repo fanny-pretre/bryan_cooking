@@ -18,7 +18,7 @@ public class MealEntityToMealResponseMapper {
         return MealResponse.builder()
                 .id(mealEntity.getId())
                 .name(mealEntity.getName())
-                .imageUrl(mealEntity.getImage_url())
+                .imageUrl(mealEntity.getImageUrl())
                 .season(mealEntity.getSeason())
                 .mealCategories(
                         mealEntity.getMealCategories().stream()
