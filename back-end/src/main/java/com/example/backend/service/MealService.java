@@ -9,11 +9,16 @@ import com.example.backend.mapper.mealCategory.MealCategoryResponseToMealCategor
 import com.example.backend.model.entity.MealEntity;
 import com.example.backend.model.input.MealInput;
 import com.example.backend.model.input.MealInputEdit;
+import com.example.backend.model.pathVariables.MealSearchCriteria;
 import com.example.backend.model.response.IngredientResponse;
 import com.example.backend.model.response.MealCategoryResponse;
 import com.example.backend.model.response.MealResponse;
 import com.example.backend.repository.MealRepository;
+import com.example.backend.repository.specification.MealSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -33,14 +38,16 @@ public class MealService {
     private final MealCategoryResponseToMealCategoryEntityMapper mealCategoryResponseToEntityMapper;
     private final IngredientResponseToIngredientEntityMapper ingredientResponseToEntityMapper;
 
+    public Page<MealResponse> getAllMeals(MealSearchCriteria criteria, Pageable pageable) {
 
-    public List<MealResponse> getAllMeals() {
+        Specification<MealEntity> spec = Specification
+                .where(MealSpecification.hasName(criteria.name()))
+                .and(MealSpecification.hasSeason(criteria.season()))
+                .and(MealSpecification.hasCategoryIds(criteria.categoryIds()))
+                .and(MealSpecification.hasIngredientIds(criteria.ingredientIds()));
 
-        List<MealEntity> meals = mealRepository.findAll();
-
-        return meals.stream()
-                .map(mealEntityToMealResponseMapper::mealMapper)
-                .toList();
+        return mealRepository.findAll(spec, pageable)
+                .map(mealEntityToMealResponseMapper::mealMapper);
     }
 
     public MealResponse findMealById(BigInteger id) {
