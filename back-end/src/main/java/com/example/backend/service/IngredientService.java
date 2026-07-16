@@ -35,9 +35,9 @@ public class IngredientService {
                 .toList();
     }
 
-    public IngredientResponse findIngredientById(String id) {
+    public IngredientResponse findIngredientById(BigInteger id) {
 
-        IngredientEntity ingredient = ingredientRepository.findById(new BigInteger(id))
+        IngredientEntity ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() ->
                         new DataNotFound("ingredient", id));
 
@@ -61,14 +61,14 @@ public class IngredientService {
     }
 
 
-    public IngredientResponse editIngredient(IngredientInputEdit ingredientInputEdit, String id) {
+    public IngredientResponse editIngredient(IngredientInputEdit ingredientInputEdit, BigInteger id) {
 
         findIngredientById(id);
         IngredientCategoryResponse category = ingredientCategoryService.findIngredientCategoryById(ingredientInputEdit.categoryId());
 
         IngredientEntity updatedEntity = ingredientRepository.save(
                 IngredientEntity.builder()
-                        .id(new BigInteger(id))
+                        .id(id)
                         .name(ingredientInputEdit.name())
                         .imageUrl(ingredientInputEdit.imageUrl())
                         .ingredientCategory(ingredientCategoryResponseToIngredientCategoryEntityMapper.mapper(category))

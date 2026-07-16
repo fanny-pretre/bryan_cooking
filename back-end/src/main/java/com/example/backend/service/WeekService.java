@@ -8,6 +8,7 @@ import com.example.backend.repository.WeekRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -34,6 +35,16 @@ public class WeekService {
                 ));
 
         return weekEntityToWeekResponseMapper.weekEntityToWeekResponse(week);
+    }
+
+    public WeekResponse findWeekById (BigInteger id){
+        WeekEntity entity = weekRepository.findById(id)
+                .orElseThrow(() -> new DataNotFound(
+                        "week",
+                        String.format("week %d",id))
+                );
+        return weekEntityToWeekResponseMapper.weekEntityToWeekResponse(entity);
+
     }
 
 }

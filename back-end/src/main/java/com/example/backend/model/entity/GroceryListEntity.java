@@ -1,7 +1,6 @@
 package com.example.backend.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,21 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name="WEEK")
-public class WeekEntity {
+@Table(name = "GROCERY_LIST")
+public class GroceryListEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
-    @NotNull
-    private Integer numYear;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "weekId", nullable = false, unique = true)
+    private WeekEntity week;
 
-    @NotNull
-    private Integer numWeek;
-
-    @OneToMany(mappedBy = "week", fetch = FetchType.LAZY)
-    private List<DayEntity> days = new ArrayList<>();
-
-    @OneToOne(mappedBy = "week", cascade = CascadeType.ALL)
-    private GroceryListEntity groceryList;
+    @OneToMany(mappedBy = "groceryList", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GroceryItemEntity> items = new ArrayList<>();
 }
